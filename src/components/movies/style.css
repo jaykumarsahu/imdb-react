@@ -1,0 +1,8 @@
+.movie-image-field .form-control-feedback{
+  margin-top: -2%;
+  padding-left: 40%;
+}
+
+.movie-image-field{
+  width: 25%;
+}
