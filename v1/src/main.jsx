@@ -21,9 +21,6 @@ import store from './store';
 import { isUserLoggedIn } from './services/user-info';
 import { START_LOADING, STOP_LOADING } from './constants/action-types';
 
-
-console.log("efrewf", process.env.NODE_ENV)
-
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>
