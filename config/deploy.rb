@@ -6,7 +6,7 @@ set :repo_url, "git@example.com:me/my_repo.git"
 
 set :linked_dirs, %w(v1/node_modules)
 set :repo_url, 'git@bitbucket.org:JAYMODII/imdb-react.git'
-set :branch, 'after-rebase'
+set :branch, 'master'
 
 set :deploy_to, "/home/deploy/imdb/imdb-react"
 set :keep_releases, 5
