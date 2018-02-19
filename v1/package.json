@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "JAY SAHU",
   "scripts": {
+    "production": "webpack-dev-server --hot -p --config webpack.dev.js",
     "start": "webpack-dev-server --hot --config webpack.dev.js",
     "lint": "node_modules/eslint/bin/eslint.js --ext .jsx,.js src",
     "lint-fix": "node_modules/eslint/bin/eslint.js --ext .jsx,.js --fix src",

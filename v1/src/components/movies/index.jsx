@@ -21,7 +21,7 @@ class Movies extends Component {
     }
   }
 
-  movieRow(movie, i) {
+  movieRow(movie) {
     return (
       <Col sm={6} md={3} key={movie.id}>
         <div className="movie-thumb thumbnail">

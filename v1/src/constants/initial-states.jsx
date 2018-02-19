@@ -19,13 +19,7 @@ export const initialMovieFormData = {
   image: { path: '', file: null },
 };
 
-
 export const loginInitialState = {
   email: 'user@example.com',
   password: '12345678',
-};
-
-export const loginInitialState1 = {
-  email: '',
-  password: '',
 };

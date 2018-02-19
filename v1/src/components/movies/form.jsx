@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Row, Col, FormGroup, Button, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import React from 'react';
+import { Row, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
 const Form = ({ movieFormData, handleInput, handleSubmit }) => (
   <div className="container">
@@ -29,7 +29,7 @@ const Form = ({ movieFormData, handleInput, handleSubmit }) => (
 
               <FormField
                 fieldName="image"
-                type="file"
+                inputField="file"
                 value={movieFormData.image}
                 handleInput={handleInput}
                 className="movie-image-field"
@@ -51,16 +51,6 @@ const Form = ({ movieFormData, handleInput, handleSubmit }) => (
   </div>
 );
 
-const submitForm = (handleSubmit, movieFormData) => {
-
-};
-
-
-const movieFormData = (movieFormData) => {
-  const formData = new FormData();
-};
-
-
 const getValidationState = (fieldName, value) => {
   switch (fieldName) {
     case 'name':
@@ -75,7 +65,7 @@ const getValidationState = (fieldName, value) => {
       return null;
     case 'release_date':
       const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-      if (value != '' && !value.match(re)) {
+      if (value !== '' && !value.match(re)) {
         return 'error';
       }
       if (value.length > 1) return 'success';
@@ -89,18 +79,23 @@ const getValidationState = (fieldName, value) => {
 };
 
 const FormField = ({
-  fieldName, value, handleInput, type = 'text', className = '',
+  fieldName, value, handleInput, inputField = 'text', className = '',
 }) => {
-  const isTypeFile = type == 'file';
+  const isFileField = (inputField === 'file');
   return (
     <Row>
-      <FormGroup controlId="formBasicText" className={className} validationState={getValidationState(fieldName, value)}>
-        <ControlLabel>{isTypeFile ? 'Upload' : 'Enter'} {fieldName.capitalize()}</ControlLabel>
+      <FormGroup
+        controlId="formBasicText"
+        className={className}
+        validationState={getValidationState(fieldName, value)}
+      >
+        <ControlLabel>{isFileField ? 'Upload' : 'Enter'} {fieldName.capitalize()}</ControlLabel>
         <FormControl
-          type="text"
-          type={type}
-          value={isTypeFile ? value.path : value}
-          onChange={e => handleInput(fieldName, e.target.value, e.target.files && e.target.files[0])}
+          type={inputField}
+          value={isFileField ? value.path : value}
+          onChange={
+            e => handleInput(fieldName, e.target.value, e.target.files && e.target.files[0])
+          }
           placeholder={`Enter ${fieldName}`}
         />
         <FormControl.Feedback />
@@ -112,6 +107,5 @@ const FormField = ({
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
-
 
 export default Form;

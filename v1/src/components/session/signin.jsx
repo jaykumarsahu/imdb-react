@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import LoginForm from './login-form';
-import { alertError, alertSuccess } from '../../pages/alert';
-import { isUserLoggedIn } from './../../services/user-info';
 import { Redirect } from 'react-router';
-import { UPDATE_SESSION_FORM_DATA, REQUEST_FOR_SESSION } from './../../constants/action-types';
-
-import API from '../../services/api';
-import AJAX from '../../services/ajax';
-import { submitLoginForm } from '../../actions/session';
+import { isUserLoggedIn } from './../../services/user-info';
+import { alertError } from '../../pages/alert';
+import LoginForm from './login-form';
+import {
+  UPDATE_SESSION_FORM_DATA, REQUEST_FOR_SESSION,
+} from './../../constants/action-types';
 
 class SignIn extends Component {
   constructor(props) {
@@ -24,10 +21,9 @@ class SignIn extends Component {
   }
 
   handleSubmit() {
-    const data = { ...this.props.loginData };
-    console.log('___________', this.props.submitloginData(data, this.props.history));
+    const credentials = { ...this.props.loginData };
+    this.props.submitLoginData(credentials, this.props.history);
   }
-
 
   render() {
     if (isUserLoggedIn()) {
@@ -65,8 +61,9 @@ const mapStateToProps = state => ({ loginData: state.loginData });
 
 const mapDispatchToProps = dispatch => ({
   onChange: (fieldName, value) => dispatch({ type: UPDATE_SESSION_FORM_DATA, fieldName, value }),
-  clearloginData: () => dispatch({ type: CLEAR_SESSION_FORM_DATA }),
-  submitloginData: (data, history) => dispatch({ type: REQUEST_FOR_SESSION, data, history }),
+  submitLoginData: (credentials, history) => dispatch({
+    type: REQUEST_FOR_SESSION, credentials, history,
+  }),
 });
 
 SignIn.contextTypes = {

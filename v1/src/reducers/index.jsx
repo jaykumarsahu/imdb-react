@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import {
-  initialUserFormData, initialMovieFormData, loginInitialState, loginInitialState1,
+  initialUserFormData, initialMovieFormData, loginInitialState,
 } from './../constants/initial-states';
 
-import { START_LOADING, STOP_LOADING,
-  movieSubmit, UPDATE_MOVIES, UPDATE_MOVIE, UPDATE_MOVIE_FORM_DATA, UPDATE_USER_FORM_DATA,
-  UPDATE_SESSION_FORM_DATA,
-  CLEAR_SESSION_FORM_DATA,
+import {
+  UPDATE_MOVIES, UPDATE_MOVIE, UPDATE_MOVIE_FORM_DATA,
+  UPDATE_USER_FORM_DATA, CLEAR_SESSION_FORM_DATA,
+  UPDATE_SESSION_FORM_DATA, CLEAR_MOVIE_FORM_DATA,
 } from './../constants/action-types';
 
 const movies = (stateData = [], action) => {
@@ -16,17 +16,6 @@ const movies = (stateData = [], action) => {
       return action.movies;
     default:
       return stateData;
-  }
-};
-
-const loading = (stateData = true, action) => {
-  switch (action.type) {
-    case START_LOADING:
-      return true;
-    case STOP_LOADING:
-      return false;
-    default:
-      return false;
   }
 };
 
@@ -41,13 +30,12 @@ const movie = (stateData = {}, action) => {
 
 const movieFormData = (stateData = initialMovieFormData, action) => {
   switch (action.type) {
-    case 'UPDATE_MOVIE_DATA':
+    case UPDATE_MOVIE_FORM_DATA:
       return {
         ...stateData,
         [action.fieldName]: action.value,
-
       };
-    case 'FLUSH_MOVIE_DATA':
+    case CLEAR_MOVIE_FORM_DATA:
       return initialMovieFormData;
     default:
       return stateData;
@@ -74,7 +62,7 @@ const loginData = (stateData = loginInitialState, action) => {
         [action.fieldName]: action.value,
       };
     case CLEAR_SESSION_FORM_DATA:
-      return loginInitialState1;
+      return loginInitialState;
     default:
       return stateData;
   }
@@ -86,7 +74,6 @@ const reducers = {
   movies,
   movieFormData,
   movie,
-  loading,
 };
 
 export default combineReducers(reducers);

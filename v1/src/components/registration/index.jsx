@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
 import API from '../../services/api';
 import AJAX from '../../services/ajax';
 import Form from './form';
 import { alertError, alertSuccess } from '../../pages/alert';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-// import BlockUi from 'react-block-ui';
-import isUserSignedIn from '../../hooks/user-checker';
+import { isUserLoggedIn } from './../../services/user-info';
 import { START_LOADING, STOP_LOADING, UPDATE_USER_FORM_DATA } from './../../constants/action-types';
 
 class Registration extends Component {
@@ -14,15 +14,10 @@ class Registration extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.state = { loading: false };
   }
 
   handleInput(fieldName, value) {
     this.props.onChange(fieldName, value);
-  }
-
-  componentWillMount() {
-    isUserSignedIn(this.props.history);
   }
 
   async handleSubmit() {
@@ -39,6 +34,11 @@ class Registration extends Component {
   }
 
   render() {
+    if (isUserLoggedIn()) {
+      alertError('User has already signed in.');
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="container">
         <div className="row">

@@ -1,26 +1,8 @@
-import { sagaMiddleware } from '../store';
-import { put, call, takeEvery, fork } from 'redux-saga/effects';
-import { getMovies, recieveMovies } from '../actions';
+import { fork } from 'redux-saga/effects';
 import session from './session';
+import movie from './movies';
 
-import {
-  REQUEST_FOR_MOVIES,
-} from './../constants/action-types';
-
-function* getMoviesFromRails() {
-  try {
-    const movies = yield call(getMovies);
-    yield put(recieveMovies(movies));
-  } catch (e) {
-    console.log('Error=====>', e);
-  }
-}
-
-export default function* mySaga() {
-  yield takeEvery(REQUEST_FOR_MOVIES, getMoviesFromRails);
-}
-
-export function* sagas() {
-  yield fork(mySaga);
+export default function* sagas() {
+  yield fork(movie);
   yield fork(session);
 }

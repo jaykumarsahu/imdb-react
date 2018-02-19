@@ -1,4 +1,6 @@
-const url = 'http://localhost:3001';
+import apiUrl from './../constants';
+
+const url = process.env.NODE_ENV === 'production' ?  apiUrl.production : apiUrl.development
 
 const API = {
   url,
