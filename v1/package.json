@@ -5,9 +5,10 @@
   "license": "MIT",
   "author": "JAY SAHU",
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "webpack-dev-server --hot --config webpack.dev.js",
     "lint": "node_modules/eslint/bin/eslint.js --ext .jsx,.js src",
-    "lint-fix": "node_modules/eslint/bin/eslint.js --ext .jsx,.js --fix src"
+    "lint-fix": "node_modules/eslint/bin/eslint.js --ext .jsx,.js --fix src",
+    "build": "webpack --config webpack.prod.js"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -32,6 +33,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
@@ -45,6 +47,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1"
+    "eslint-plugin-react": "^7.6.1",
+    "webpack-merge": "^4.1.1"
   }
 }
