@@ -19,6 +19,8 @@ const isUserLoggedIn = () => {
   return (token && token.length > 10);
 };
 
+const isProduction = process.env.NODE_ENV === 'production';
 
 export { isUserLoggedIn };
+export { isProduction };
 export default userInfo;

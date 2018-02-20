@@ -17,3 +17,5 @@ set :rvm_ruby_string, '2.4.1'
 set :nvm_type, :user
 set :nvm_node, 'v0.33.4'
 set :nvm_map_bins, %w{node npm}
+
+before 'deploy:symlink:release', 'script:build'

@@ -1,6 +1,7 @@
 import apiUrl from './../constants';
+import {isProduction} from './user-info';
 
-const url = process.env.NODE_ENV === 'production' ?  apiUrl.production : apiUrl.development
+const url = isProduction ?  apiUrl.production : apiUrl.development
 
 const API = {
   url,
